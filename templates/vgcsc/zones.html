@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <p>VGC Sub-council has two zones viz zone 1 and zone 2</p>
+            <div class="accordion accordion-flush" id="zonesAccordion">
+                    <div class="card">
+                      <div class="card-header" id="zoneOne">
+                        <h2 class="mb-0">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Zone 1
+                          </button>
+                        </h2>
+                      </div>
+
+                      <div id="collapseOne" class="collapse show" aria-labelledby="zoneOne" data-bs-parent="#zonesAccordion">
+                        <div class="card-body">
+                          <ul class="list-group">
+                              <li class="list-group-item">Zonal Leader - <small class="text-muted">WB. Sylvester Iyalekhue</small></li>
+                              <li class="list-group-item">Zonal Secretary -<small class="text-muted">WB. Obinna Eze</small></li>
+                              <!-- <li class="list-group-item">Zonal Leader - <small class="text-muted">WB. Anthony Ukairo</small></li>
+                              <li class="list-group-item">Zonal Leader - <small class="text-muted">WB. Anthony Ukairo</small></li>
+                              <li class="list-group-item">Zonal Leader - <small class="text-muted">WB. Anthony Ukairo</small></li>
+                              <li class="list-group-item">Zonal Leader - <small class="text-muted">WB. Anthony Ukairo</small></li> -->
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="zoneTwo">
+                        <h2 class="mb-0">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Zone 2
+                          </button>
+                        </h2>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="zoneTwo" data-bs-parent="#zonesAccordion">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">Zonal Leader - <small class="text-muted">WB. Ena Ofugara</small></li>
+                                <li class="list-group-item">Zonal Secretary - <small class="text-muted">WB. Bidwel Okere</small></li>
+                                <li class="list-group-item">Zonal Fin. Secretary - <small class="text-muted">WB. Oliver Ugwu</small></li>
+                                <!--<li class="list-group-item">Zonal Asst. Secretary - <small class="text-muted"></small></li>-->
+                                <!-- <li class="list-group-item">Zonal Leader - <small class="text-muted">WB. Anthony Ukairo</small></li>
+                                <li class="list-group-item">Zonal Leader - <small class="text-muted">WB. Anthony Ukairo</small></li>
+                                <li class="list-group-item">Zonal Leader - <small class="text-muted">WB. Anthony Ukairo</small></li> -->
+                            </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+        </div>
+    </div>
+
+
+{% endblock %}

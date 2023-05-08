@@ -1,0 +1,42 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+    <!-- <br> -->
+
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-6">
+                <!-- <h2 class="heading mb-3">Fly makes you faster</h2>
+                <div class="sub-heading">
+                <p class="mb-4">New free template by <a href="http://uicookies.com" target="_blank">uicookies.com</a>. For more templates visit the <a href="http://uicookies.com" target="_blank">site</a>. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p class="mb-5"><a class="btn btn-success btn-lg pb_btn-pill smoothscroll" href="#section-pricing"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">See Pricing</span></a></p>
+                </div> -->
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5 col-sm-12">
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-danger" style="height: fit-content !important;">
+                  <p class="">{{ message }}</p>
+                </div>
+              {% endfor %}
+                <form action="" method="POST" class="bg-white rounded pb_form_v1">
+                    <h4 class="mb-4 mt-0 text-center">Login</h4>
+                    <div class="input-group mb-3">
+                        <!-- <label for="email">Email</label> -->
+                        <input type="email" id="email" class="form-control pb_height-50"
+                        placeholder="Email" name="email" required="required">
+                    </div>
+                    <div class="input-group mb-3">
+                        <!-- <label for="password">Password</label> -->
+                        <input type="password" name="password" id="password" placeholder="Password"
+                        class="form-control pb_height-50">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-md btn-block pb_btn-pill btn-shadow-blue">
+                        <i class="fa fa-sign-in"></i> Login
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+{% endblock %}

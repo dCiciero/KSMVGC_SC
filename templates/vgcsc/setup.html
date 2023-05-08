@@ -1,0 +1,216 @@
+{% extends 'base_member.html' %}
+{% block content %}
+
+    <div class="card w-75 mx-auto">
+        <!-- <div id="alertBox" class="alert alert-info alert-sm" >
+            <p id="alert-msg" ></p>
+        </div> -->
+        <div class="card-body">
+            {% if setup %}
+            <h5 class="card-title text-center">{{ setup }} Setup</h5>
+                {% if form %}
+                    {% if setup in ["Zonal Executive", "Sub Council Executive"] %}
+                        <form method="POST" novalidate>
+                            {{ form.hidden_tag() }}
+                            <div class="form-group">
+                                {{ form.name(size=32, id="txt_name",  class="form-control form-control-sm", placeholder="Name of Executive") }}
+                                {% for error in form.name.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                {% endfor %}
+                                <!-- <input type="text" id="txtDescr" name="descr" placeholder="{{ setup }}" class="form-control form-control-sm"> -->
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6 col-sm-12">
+                                    {{form.post.label}}
+                                    {{ form.post(id="txt_post", class="form-control form-control-sm", placeholder="Post of Executive") }}
+                                    {% for error in form.post.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+                                    <!-- <input type="text" id="txtDescr" name="descr" placeholder="{{ setup }}" class="form-control form-control-sm"> -->
+                                </div>
+                                <div class="form-group col-md-6 col-sm-12">
+                                    {{ form.date_elect.label }}
+                                    {{ form.date_elect(size=32, class="form-control form-control-sm",  placeholder="dd/mm/yyyy") }}
+                                    {% for error in form.date_elect.errors %}
+                                    <span style="color: red; font-size: 10px;">[{{ error }}]</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6 col-sm-12">
+                                    {{ form.alias.label }}
+                                    {{ form.alias(id="txt_post", class="form-control form-control-sm", placeholder="Alias") }}
+                                    {% for error in form.alias.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group col-md-6 col-sm-12">
+                                    {{ form.arm.label }}
+                                    {{ form.arm(id="txt_post", class="form-control form-control-sm", placeholder="Arm") }}
+                                    {% for error in form.arm.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                {{ form.submit(class="btn btn-success btn-md btn-block") }}
+                                <!-- <input id="btnSaveEntry" type="submit" value="Save Entry" class="btn btn-success form-control"> -->
+                            </div>
+                            <hr>
+                            <div >
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <input type="text" name="search_exco" id="txt_search_exco"
+                                        class="form-control form-control-sm " placeholder="Type name to search">
+                                        <a href="#" class="search-icon">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group table-responsive" style="max-height: 280px;">
+                                    {% if excos %}
+                                    <table id="exco_table" class="table table-sm table-hover table-dark table-striped table-bordered mx-auto">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Full Name</th>
+                                                <th>Post</th>
+                                                <!-- <th>Arm</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for exco in excos %}
+                                            <tr>
+                                                <th scope="row">{{ exco.id }}</th>
+                                                <td>{{ exco.name }}</td>
+                                                <td>{{ exco.post }}</td>
+                                                <!-- <td>{{ exco.where }}</td> -->
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% endif %}
+                                </div> <!-- end div form-group for table -->
+                            </div>
+
+                        </form>
+                    {% elif setup == "Office" %}
+                        <form method="POST" novalidate>
+                            {{ form.hidden_tag() }}
+                            <div class="form-group">
+                                {{ form.post(size=32, id="txt_post_office", class="form-control form-control-sm", placeholder="Enter name") }}
+                                {% for error in form.post.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                {% endfor %}
+                                <!-- <input type="text" id="txtDescr" name="descr" placeholder="{{ setup }}" class="form-control form-control-sm"> -->
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6 col-xs-12">
+                                    {{ form.alias.label }}
+                                    {{ form.alias(size=20, id="txt_aliasOffice", class="form-control form-control-sm", placeholder="Enter Post Aliais eg WGK") }}
+                                    {% for error in form.alias.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+                                    <!-- <input type="text" id="txtDescr" name="descr" placeholder="{{ setup }}" class="form-control form-control-sm"> -->
+                                </div>
+                                <div class="form-group col-md-6 col-xs-12">
+                                    {{ form.arm.label }}
+                                    {{ form.arm(class="form-control form-control-sm") }}
+                                    {% for error in form.arm.errors %}
+                                    <span style="color: red; font-size: 10px;">[{{ error }}]</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                {{ form.submit(class="btn btn-success btn-md btn-block") }}
+                                <!-- <input id="btnSaveEntry" type="submit" value="Save Entry" class="btn btn-success form-control"> -->
+                            </div>
+                        </form>
+                    {% elif setup == "News" %}
+                        {% if news %}
+                            <form method="POST" novalidate>
+                                {{ form.hidden_tag() }}
+                                <div class="form-group">
+                                    {{ form.topic(size=32, id="txt_post_office", class="form-control form-control-sm", placeholder="Topic") }}
+                                    {% for error in form.topic.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+                                    <!-- <input type="text" id="txtDescr" name="descr" placeholder="{{ setup }}" class="form-control form-control-sm"> -->
+                                </div>
+                                <div class="form-group">
+                                    {{ form.content.label}}
+                                    {{ form.content(size=64, id="txt_newsContent", class="form-control form-control-sm", placeholder="Enter description here") }}
+                                    {% for error in form.content.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+                                    <!-- <input type="text" id="txtDescr" name="descr" placeholder="{{ setup }}" class="form-control form-control-sm"> -->
+                                </div>
+
+                                <div class="form-group ">
+                                    {{ form.submit(class="btn btn-success btn-md btn-block") }}
+                                    <!-- <input id="btnSaveEntry" type="submit" value="Save Entry" class="btn btn-success form-control"> -->
+                                </div>
+                            </form>
+                        {% endif %}
+                    {% elif setup == "Gallery" %}
+                    <form method="POST" novalidate>
+                        <div class="mb-3">
+                            <input type="text" id="txtDescr" name="descr" placeholder="{{ setup }}" class="form-control form-control-sm">
+                        </div>
+                        <input id="btnSaveEntry" type="submit" value="Save Entry" class="btn btn-sm btn-success">
+                    </form>
+                    <hr>
+                    <div class="">
+                        <div class="mb-3">
+                            <input type="text" name="search_exco" id="txt_search_exco"
+                            class="form-control form-control-sm" placeholder="Type name to search">
+                            <a href="#" class="search-icon">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group table-responsive" style="max-height: 280px;">
+                    {% if galleries %}
+                        <table id="gallery_table" class="table table-sm table-hover table-light table-striped table-bordered mx-auto">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Description</th>
+                                    <!-- <th>Post</th> -->
+                                    <!-- <th>Arm</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for gallery in galleries %}
+                                <tr>
+                                    <th scope="row">{{ gallery.id }}</th>
+                                    <td>{{ gallery.name }}</td>
+                                    <!-- <td></td> -->
+                                    <td class="shift-left">
+                                        <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="#" class="btn btn-sm btn-primary">Delete</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <form method="POST" novalidate>
+
+                        <div class="form-group">
+                            <input type="text" id="txtDescr" name="descr" placeholder="{{ setup }}" class="form-control form-control-sm">
+                        </div>
+                        <input id="btnSaveEntry" type="submit" value="Save Entry" class="btn btn-success form-control">
+                    </form>
+                    {% endif %}
+
+                {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}

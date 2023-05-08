@@ -1,0 +1,120 @@
+{% extends 'base_member.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            {% if details %}
+                <h6 class="card-title">Details of {{ details.first_name|e+" "+(details.other_names if details.other_names != None else "")| trim()+" "+details.last_name |e }}</h6>
+
+
+                <hr>
+
+                {% if form %}
+                <form method="POST" class="row g-3" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="col-md-3">
+                        {{form.ksmno.label(class='form-label' )}}
+                        {{form.ksmno(size=12, class='form-control-plaintext form-control-sm', value=details.ksmno )}}
+                        <!--<label for="inputEmail4" class="form-label">Email</label>-->
+                        <!--<input type="email" class="form-control" id="inputEmail4">-->
+                    </div>
+                    <div class="col-md-3">
+                        {{form.firstname.label(class="form-label")}}
+                        {{form.firstname(size=32, class='form-control form-control-sm', value=details.first_name )}}
+                    </div>
+                    <div class="col-md-3">
+                        {{form.midname.label(class="form-label")}}
+                        {{form.midname(size=32, class='form-control form-control-sm', value=details.other_names )}}
+                    </div>
+                    <div class="col-md-3">
+                        {{form.lastname.label(class="form-label")}}
+                        {{form.lastname(size=32, class='form-control form-control-sm', value=details.last_name )}}
+                    </div>
+
+                    <div class="col-md-3">
+                        {{form.phone1.label(class='form-label' )}}
+                        {{form.phone1(size=32, class='form-control form-control-sm', value=details.phone )}}
+                        <!--<label for="inputEmail4" class="form-label">Email</label>-->
+                        <!--<input type="email" class="form-control" id="inputEmail4">-->
+                    </div>
+                    <div class="col-md-3">
+                        {{form.phone2.label(class='form-label' )}}
+                        {{form.phone2(size=32, class='form-control form-control-sm', value=details.phone2 )}}
+                    </div>
+                    <div class="col-md-3">
+                        {{form.dob.label(class="form-label")}}
+                        {{form.dob(size=32, class='form-control form-control-sm', value=details.birth_date, placeholder='dd/mm/yyyy' )}}
+                    </div>
+                    <div class="col-md-3">
+                        {{form.lastInvested.label(class="form-label")}}
+                        {{form.lastInvested(size=32, class='form-control form-control-sm', value=details.investiture_date|e, placeholder='dd/mm/yyyy' )}}
+                    </div>
+
+
+                    <div class="col-md-3">
+                        {{ form.email.label(class="form-label") }}
+                        {{ form.email(size=32, class='form-control form-control-sm', value=details.email) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.nationality.label(class="form-label") }}
+                        {{ form.nationality(size=32, class='form-control form-control-sm', value=details.nationality) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.state_of_origin.label(class="form-label") }}
+                        {{ form.state_of_origin(size=32, class='form-control form-control-sm', value=details.state_of_origin) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.home_town.label(class="form-label") }}
+                        {{ form.home_town(size=32, class='form-control form-control-sm', value=details.home_town) }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.occupation.label(class="form-label") }}
+                        {{ form.occupation(size=32, class='form-control form-control-sm', value=details.occupation) }}
+                    </div>
+                    <div class="col-md-8">
+                        {{ form.address.label(class="form-label") }}
+                        {{ form.address( class='form-control form-control-sm', value=details.address) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.degree_in_order.label(class="form-label") }}
+                        {{ form.degree_in_order( class='form-control form-control-sm', value=details.degree) }}
+                    </div>
+
+                    <div class="col-md-3">
+                        {{ form.initiated_sc.label(class="form-label") }}
+                        {{ form.initiated_sc( class='form-control form-control-sm', value=details.initiated_sc) }}
+                    </div>
+
+                    <div class="col-md-3">
+                        {{ form.current_sc.label(class="form-label") }}
+                        {{ form.current_sc( class='form-control form-control-sm', value=details.current_sc) }}
+                    </div>
+
+                    <div class="col-md-3">
+                        {{ form.place_initiated.label(class="form-label") }}
+                        {{ form.place_initiated( class='form-control form-control-sm', value=details.place_initiated) }}
+                    </div>
+
+                    <div class="col-md-3">
+                        {{ form.date_initiated.label(class="form-label") }}
+                        {{ form.date_initiated( class='form-control form-control-sm', value=details.initiation_date) }}
+                    </div>
+
+                    <div class="col-md-3">
+                        {{ form.membership_status.label(class="form-label") }}
+                        {{ form.membership_status( class='form-control form-control-sm', value=details.membership_status) }}
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-sm btn-success">Save Record</button>
+                    </div>
+
+
+
+
+                </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

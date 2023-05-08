@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} - Knights of St. Mulumba VGC SC</title>
+
+  <!-- Bootstrap -->
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+        crossorigin="anonymous">
+<!--  <link rel="stylesheet" href="{{ url_for('static', filename='vgcsc/css/bootstrap4/bootstrap.min.css') }}">-->
+<!--  <link rel="stylesheet" href="{{ url_for('static', filename='vgcsc/css/font-awesome.min.css') }}">-->
+<!--  <link rel="stylesheet" href="{{ url_for('static', filename='vgcsc/css/jquery.bxslider.css') }}">-->
+<!--  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vgcsc/css/isotope.css') }}" media="screen" />-->
+<!--  <link rel="stylesheet" href="{{ url_for('static', filename='vgcsc/css/animate.css') }}">-->
+<!--  <link rel="stylesheet" href="{{ url_for('static', filename='vgcsc/js/fancybox/jquery.fancybox.css') }}" type="text/css" media="screen" />-->
+<!--  <link href="{{ url_for('static', filename='vgcsc/css/prettyPhoto.css') }}" rel="stylesheet" />-->
+  <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+  <!-- <link href="{{ url_for('static', filename='vgcsc/css/style.css') }}" rel="stylesheet" /> -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/vgcsc.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='vgcsc/css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vgcsc/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vgcsc/css/vgcsc.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}"> -->
+</head>
+<section>
+  {% block navbar %}
+
+    <nav class="fixed-top" >
+      <div id="banner" class="nav nav-bar-expand-lg">
+        <div class="container">
+          <div class="logo">
+            <a class="navbar-brand" href="{{ url_for('index') }}" >
+              <img id="banner_logo" src="../static/images/Logo_KSM_Site.PNG" class="img-responsive">
+              <!-- <p  id="banner_head"></p>
+              <p  id="banner_head2"><sup style="margin: 0px;">&reg;</sup></p>
+              <p  id="banner_head3"></p> -->
+            </a>
+          </div>
+          <div class="ksm-motto">
+            <p>Tempus Fugit Memento Mori</p>
+          </div>
+        </div>  <!-- end container -->
+      </div> <!-- end banner -->
+      <div class="navbar navbar-expand-sm navbar-dark bg-success ">
+        <div class="container">
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+                  data-bs-target="#navbar_ksmvgc"
+                  aria-controls="navbar_ksmvgc" aria-expanded="false" aria-label="Toggle Navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- <a class="navbar-brand" href="{{ url_for('index') }}">
+              <img id="ksmvgc_logo" src="../static/images/neulogo.png" width="40" height="40" alt="">
+              <label id="ksmvgc_label" for="">
+                KSM VGC
+              </label>
+          </a> -->
+          <div class="collapse navbar-collapse" id="navbar_ksmvgc">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link active py-0" aria-current="page" href="{{url_for('index')}}">Home</a></li>
+
+              <li class="nav-item dropdown" >
+                <a class="nav-link dropdown-toggle py-0" href="#" id="galleryDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Gallery
+                </a>
+                <div class="dropdown-menu" aria-labelledby="galleryDropdown">
+                    {% if gallery_options %}
+                    {% for options in gallery_options %}
+                    <a class="dropdown-item py-0.5" href="{{ url_for('gallery',id=options.id) }}">{{ options.name }}</a>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+              </li>
+              <li class="nav-item" ><a class="nav-link py-0" href="{{url_for('zones')}}">Zones</a></li>
+              <li class="nav-item dropdown" >
+                <a class="nav-link dropdown-toggle py-0" href="#" id="excoDropdown" role="button"
+                  data-bs-toggle="dropdown"  aria-expanded="false">
+                  Executives
+                </a>
+                <div class="dropdown-menu" aria-labelledby="excoDropdown">
+                  <a class="dropdown-item py-0 " href="{{ url_for('exco',option='KSM') }}">KSM Executives</a>
+                  <a class="dropdown-item py-0" href="{{ url_for('exco',option='LSM') }}">LSM Executives</a>
+
+                </div>
+              </li>
+              <li class="nav-item"><a class="nav-link py-0" href="{{url_for('contactus')}}">Contact Us</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item" ><a class="nav-link py-0" href="{{url_for('membership')}}">Members Only</a></li>
+            </ul>
+          </div>
+        </div>  <!-- end container -->
+      </div> <!-- end navbar-->
+    </nav>
+  {% endblock %}
+</section>
+<br>
+<section class="content">
+
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        {% block carousel %} {% endblock %}
+      <!-- <br> -->
+      <header>
+        {% block header %}{% endblock %}
+      </header>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages  %}
+            <div class="alert alert-{{category}} alert-dismissible fade show"  role="alert">
+              {{ message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+
+<!-- Footer -->
+<footer id="footer" class="page-footer font-small indigo">
+
+  <!-- Footer Links -->
+  <div class="container">
+
+    <!-- Grid row-->
+    <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!">About us</a>
+        </h6>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!">Products</a>
+        </h6>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!">Awards</a>
+        </h6>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!">FAQ</a>
+        </h6>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <!-- <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!">Contact</a>
+        </h6>
+      </div> -->
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+    <hr class="rgba-white-light" style="margin: 0 15%;">
+
+    <!-- Grid row-->
+    <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
+
+      <!-- Grid column -->
+      <div class="col-md-5 col-12 mt-5">
+        <p style="line-height: 1.7rem">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium doloremque laudantium, totam rem
+          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+          explicabo.
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</p>
+      </div>
+      <!-- Grid column -->
+      <!-- Grid column -->
+      <div class="col-md-4 col-12 mt-4">
+          <h6 class="font-weight-bold text-uppercase mt-3 mb-4">Contact</h6>
+
+          <ul class="list-unstyled">
+            <li>
+              <i class="fa fa-home mr-3"></i> Victoria Garden City, VGC 10012, NG
+            </li>
+            <li>
+                <i class="fa fa-envelope mr-3"></i> ksmvgc@gmail.com
+            </li>
+            <li>
+                <i class="fa fa-phone mr-3"></i> +234 803 581 9973
+            </li>
+            <!-- <li>
+              <a href="#!">Link 4</a>
+            </li> -->
+          </ul>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+    <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
+
+    <!-- Grid row-->
+    <div class="row text-center pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-12">
+
+        <div class="mb-5 flex-center">
+
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <i class="fa fa-facebook-f fa-lg white-text mr-4"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+            <i class="fa fa-twitter fa-lg white-text mr-4"> </i>
+          </a>
+          <!-- Google +-->
+          <a class="gplus-ic">
+            <i class="fa fa-google-plus fa-lg white-text mr-4"> </i>
+          </a>
+          <!--Linkedin -->
+          <a class="li-ic">
+            <i class="fa fa-linkedin fa-lg white-text mr-4"> </i>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic">
+            <i class="fa fa-instagram fa-lg white-text mr-4"> </i>
+          </a>
+          <!--Pinterest-->
+          <a class="pin-ic">
+            <i class="fa fa-pinterest fa-lg white-text"> </i>
+          </a>
+
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+
+  </div>
+  <!-- Footer Links -->
+
+</footer>
+<!-- Footer -->
+<!-- Footer -->
+    <!-- <footer id="footer">
+        {% block footer%} {% endblock %}
+          <div class="">
+            <ul class="footer_list">
+              <li><a href="">About Us</a></li>
+              <li><a href="">FAQ</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+    </footer> -->
+    <div id="footer_copyright" class="footer-copyright text-center py-3">
+        <small>Copyright &copy 2019 Knights of St. Mulumba VGC Sub Council.</small>
+    </div>
+  </div>    <!-- end container-->
+</section>
+
+
+<!--jQuery 3.x-->
+<script src="https://code.jquery.com/jquery-3.6.2.min.js"
+        integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA="
+        crossorigin="anonymous"></script>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous">
+</script>
+<!--<script src="{{ url_for('static', filename='vgcsc/js/jquery-2.1.1.min.js') }}"></script>-->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- <script src="{{ url_for('static', filename='vgcsc/js/bootstrap.min.js') }}"></script> -->
+<!--<script src="{{ url_for('static', filename='vgcsc/js/bootstrap4/bootstrap.min.js') }}"></script>-->
+<!--<script src="{{ url_for('static', filename='vgcsc/js/wow.min.js') }}"></script>-->
+<!--<script src="{{ url_for('static', filename='vgcsc/js/fancybox/jquery.fancybox.pack.js') }}"></script>-->
+<!--<script src="{{ url_for('static', filename='vgcsc/js/jquery.easing.1.3.js') }}"></script>-->
+<!--<script src="{{ url_for('static', filename='vgcsc/js/jquery.bxslider.min.js') }}"></script>-->
+<!--<script src="{{ url_for('static', filename='vgcsc/js/jquery.prettyPhoto.js') }}"></script>-->
+<!--<script src="{{ url_for('static', filename='vgcsc/js/jquery.isotope.min.js') }}"></script>-->
+<!--<script src="{{ url_for('static', filename='vgcsc/js/functions.js') }}"></script>-->
+<script>
+  wow = new WOW({}).init();
+</script>
+
+<!-- Bootstrap related JavaScript -->
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+
+<!-- <script src="{{ url_for('static', filename='vgcsc/js/jquery-3.3.1.slim.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vgcsc/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vgcsc/js/vgcsc.js') }}"></script> -->

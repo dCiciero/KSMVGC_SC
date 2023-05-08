@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}Executives{% endblock %}
+<style>
+    @media (max-width: 499px){
+    .row h3::before{
+        content: "Executives"
+    }
+    .row h3{
+        border: 1px solid red;
+    }
+}
+</style>
+{% block content %}
+    {% if excos %}
+    <div class="card">
+        <div class="card-body">
+            <h3 id="exco_head" class="card-title mb-4"></h3>
+            <div class="row">
+                {% for exco in excos %}
+                <div class="quotes col">
+                    <div class="">
+                      <div id="img_container" class=" ">
+                          {% if exco.where == "KSM" %}
+                            <img id="exco_photo" src="../../static/images/KSM_default.jpg"
+                                class="rounded-circle mx-auto d-block img-responsive"  alt="...">
+                        <!-- <p>The first step toward success is taken when you refuse to be a captive of the environment in which you first find yourself. </p> -->
+                            <p class="card-text text-center" >
+                                <small class="fst-italic" >WB. {{ exco.name }} </small>
+                            </p>
+                            <p class="text-center"><small class="fst-italic" >{{ exco.post }} ({{exco.alias}})</small></p>
+                        {% else %}
+                            <img id="exco_photo" src="../static/vgcsc/images/LSM_Default.jpg"
+                                class="rounded-circle mx-auto d-block" alt="...">
+                            <!-- <p>The first step toward success is taken when you refuse to be a captive of the environment in which you first find yourself. </p> -->
+                            <p class="card-text text-center" >
+                                <small class="fst-italic" >Sr. {{ exco.name }} </small>
+                            </p>
+                            <p class="text-center">
+                                <small class="fst-italic" >{{ exco.post }} ({{exco.alias}})</small>
+                            </p>
+                        {% endif %}
+                      </div>
+                      <div class="bg"></div>
+                    </div> <!-- end card -->
+                </div>
+                    <!-- <div class="col-sm-2"> -->
+                        <!-- <div class="exco_img_dp" style="background-color: grey; margin: 5px;">
+                            <img id="exco_photo" src="../static/images/KSM_default.jpg"
+                            style=" margin:auto; height: 140px;"  class="rounded-circle" alt="...">
+                        </div> -->
+
+                        <!-- <div id="exco_img_card" class="card mb-3 bg-success" >
+                            <div class="row no-gutters">
+                                <div class="col-md-12">
+                                    <img id="exco_photo" src="../../static/images/KSM_default.jpg" class="card-img" alt="...">
+                                </div>
+                            </div>
+                            <div class="row no-gutters">
+                                <div class="col-md-12">
+                                    <div class="card-body">
+                                    <p class="card-title">{{ exco.post }}</p>
+                                    <p class="card-text"><small class="">WB. {{ exco.name }}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    <!-- </div> -->
+                {% endfor %}
+            </div>
+         </div> <!--end card-body -->
+    </div> <!--end card-body -->
+        <!-- <div class="row">
+                <h3 id="exco_head" class="card mb-3"></h3>
+        </div> -->
+
+    {% endif %}
+
+    <!-- <div class="card bg-dark text-white">
+        <img src="..." class="card-img" alt="...">
+        <div class="card-img-overlay">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">Last updated 3 mins ago</p>
+        </div>
+    </div> -->
+{% endblock %}

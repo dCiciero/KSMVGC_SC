@@ -1,0 +1,77 @@
+{% extends 'base_member.html' %}
+<section>
+
+{% block content %}
+    <div id="member_page" class="card ">
+        <div class="card-body">
+            {% if member %}
+            <h6>Member zone - <span>{{ member.first_name + " "+ member.other_names+ " "+  member.last_name }}</span> </h6>
+            <div class="table-responsive">
+            <table class="table table-sm table-bordered table-hover table-striped ">
+                {% if current_user.is_admin %}
+                <caption><a class="btn btn-sm btn-primary" href="{{ url_for('editDirectory', opt = member.id) }}" role="button" >Edit Record</a></caption>
+                {% endif %}
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Details</th>
+                        <!-- <th>Modify</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <td>First Name</td>
+                        <td>{{ member.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Other Names</td>
+                        <td>{{ member.other_names }}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>{{ member.last_name }}</td>
+                    </tr> -->
+                    <tr>
+                        <td>Phone</td>
+                        <td>{{ member.phone }}</td>
+                        <!-- <td><a class="btn btn-sm btn-primary btn-block" href="#" role="button w-100" >Edit</a></td> -->
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>{{ member.address }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ member.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth</td>
+                        <td>{{ member.birth_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Date Initaited</td>
+                        <td>{{ member.initiation_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Investiture</td>
+                        <td>{{ member.investiture_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Home Town</td>
+                        <td>{{ member.home_town }}</td>
+                    </tr>
+                    <tr>
+                        <td>State of Origin</td>
+                        <td>{{ member.state_of_origin }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+            {% endif %}
+
+
+        </div>
+    </div>
+{% endblock %}
+</section>

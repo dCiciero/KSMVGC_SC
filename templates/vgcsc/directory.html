@@ -1,0 +1,53 @@
+{% extends 'base_member.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Directory of WBs</h5>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <input type="text" name="search_exco" id="txt_search_members"
+                    class="form-control form-control-sm " placeholder="Type name to search">
+
+                </div>
+                <!-- <div class="form-group col-md-3">
+                    <button class="btn btn-success btn-sm">Search</button>
+                </div> -->
+            </div>
+            {% if members %}
+            <div class="table-responsive">
+            <table id="membersTable" class="table table-sm table-hover table-boredered border-success ">
+                <thead>
+                    <tr>
+                        <th>KSM No</th>
+                        <th>Name</th>
+                        <th>Phone No.</th>
+                        <!--<th>Address</th>-->
+                        <th>Email</th>
+                        <!--<th>Occupation</th>-->
+                        <th>Details</th>
+                        {% if current_user.is_admin %}<th>Edit</th>{% endif %}
+                    </tr>
+                </thead>
+                    <tbody>
+                        {% for member in members -%}
+                        <tr>
+                            <td>{{ member.ksmno if member.ksmno != None else ""  }}</td>
+                            <td>{{  member.first_name.title()|e+" "+(member.other_names.title() if member.other_names != None else "")| trim()+" "+member.last_name.title() |e }}</td>
+                            <td>{{ member.phone if member.phone != None else "" }}</td>
+                            <!--<td>{{ member.address if member.address != None else ""   }}</td>-->
+                            <td>{{ member.email if member.email != None else ""  }}</td>
+                            <!--<td>{{ member.occupation if member.occupation != None else ""  }}</td>-->
+                            <td><a href="{{ url_for('memberdetails', opt = member.id) }}" class="btn btn-sm btn-success adm-button-sm">Details</a></td>
+                            {% if current_user.is_admin %}
+                                <td><a href="{{ url_for('editDirectory', opt = member.id) }}" class="btn btn-sm btn-success adm-button-sm">Edit</a></td>
+                            {% endif%}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

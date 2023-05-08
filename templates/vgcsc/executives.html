@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Executives{% endblock %}
+<style>
+    @media (max-width: 499px){
+    .row h3::before{
+        content: "Executives"
+    }
+    .row h3{
+        border: 1px solid red;
+    }
+}
+</style>
+{% block content %}
+    {% if excos %}
+    <div class="card">
+        <div class="card-body">
+            <h3 id="exco_head" class="card-title mb-3"></h3>
+            <div class="row">
+                {% for exco in excos %}
+                    <div class="col-sm-4">
+                        <img id="exco_photo" src="../../static/images/KSM_default.jpg" class="rounded-circle" alt= "{{ exco.name }}">
+                        <!-- <div id="exco_img_card" class="card mb-3 bg-success" style="max-width: 540px;">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img id="exco_photo" src="../../static/images/KSM_default.jpg" class="card-img" alt= "{{ exco.name }}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                    <h6 class="card-title">{{ exco.post }}</h5>
+                                    <!-- <p class="card-text">{{ exco.name }}</p> --
+                                    <!-- <p class="card-text"><small class="">WB. {{ exco.name }}</small></p> ->
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+        <!-- <div class="row">
+                <h3 id="exco_head" class="card mb-3"></h3>
+        </div> -->
+        
+    {% endif %}
+
+    <!-- <div class="card bg-dark text-white">
+        <img src="..." class="card-img" alt="...">
+        <div class="card-img-overlay">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">Last updated 3 mins ago</p>
+        </div>
+    </div> -->
+{% endblock %}

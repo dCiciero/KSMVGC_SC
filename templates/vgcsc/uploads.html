@@ -1,0 +1,99 @@
+{% extends 'base_member.html' %}
+{% block content %}
+<!-- {% for message in get_flashed_messages() %}
+<div class="alert alert-info">
+  <p class="lead">{{ message }}</p>
+</div>
+{% endfor %} -->
+
+    <div class="card w-50 mx-auto">
+        <div id="alertBox" class="alert alert-info alert-sm" >
+            <p id="alert-msg" ></p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-center">Upload Screen</h5>
+            <div class="uploadtype_selection">
+                <div class="form-check form-check-inline rdbtn_uploadtype">
+                  <input class="form-check-input" type="radio" name="rdbtn_uploadtype" id="rdbtn_uploadtype_doc">
+                  <label class="form-check-label" for="rdbtn_uploadtype_doc">
+                    Document/File
+                  </label>
+                </div>
+                <div class="form-check form-check-inline rdbtn_uploadtype">
+                  <input class="form-check-input" type="radio" name="rdbtn_uploadtype" id="rdbtn_uploadtype_photo">
+                  <label class="form-check-label" for="rdbtn_uploadtype_photo">
+                    Photos
+                  </label>
+                </div>
+            </div> <!-- End uploadtype DIV -->
+            <div class="doc_upload_section">
+                <!--<h3>Upload Document</h3>-->
+                <form id="frm_doc_upload" name="form_doc_upload" method="POST"
+                    enctype="multipart/form-data" >
+                    <div class="mb-3">
+                        <label for="txtDocUpload">Select document to upload</label>
+                        <input type="file" name="file" id="txtDocUpload"
+                               class="form-control form-control-sm"
+                               accept=".doc,.docx,.xlsx, xls"
+                        multiple=multiple>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="txtChess" class="form-control form-control-sm" id="txtChess">
+                    </div>
+                    <input id="btnDocUpload" type="submit" value="Upload to table" class="btn btn-sm btn-success">
+                </form>
+            </div>  <!-- doc_upload_section -->
+            <div class="photo_upload_section">
+                <form id="frm-upload" name="form_photo_upload" method="POST"
+                    enctype="multipart/form-data" action="{{ url_for('uploads') }}" >
+                    <div class="mb-3">
+                        {% if photoType %}
+                            <select name="photoType" name="uploadType" id="uploadType" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected value="0">Select Section to upload Photo</option>
+                                {% for type in photoType %}
+                                    <option value="{{ type.id }}">{{ type.name }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        <br>
+                        <!-- <input type="submit" value="Upload" class="btn btn-success form-control"> -->
+                    </div>
+                    <!--<div id="galleryOptionsWrapper" class="form-group">-->
+
+                    <div id="galleryOptionsWrapper" style="display: none;"  class="form-group">
+                        {% if galleryOptions %}
+                            <!-- <label for="galleryOptions">Options</label> -->
+                            <select id="galleryOptions" name="galleryOptions" class="form-select form-select-sm" aria-label="Default select">
+                                <option value=0>--Select--</option>
+                                {% for options in galleryOptions %}
+                                    <option value="{{ options.id }}">{{ options.name }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        <br>
+                        <!-- <input type="submit" value="Upload" class="btn btn-success form-control"> -->
+                    </div>
+                    <!--<div id="photoCaption" class="form-group">-->
+                    <div id="photoCaption" style="display: none;" class="form-group">
+                        <!-- <label for="txtcaption">Caption</label> -->
+                        <input type="text" name="filecaption" id="txtcaption" placeholder="Give a brief description of the photo"
+                            class="form-control form-control-sm">
+                        <br>
+                        <!-- <input type="submit" value="Upload" class="btn btn-success form-control"> -->
+                    </div>
+                    <!-- <div class="form-group">
+                        <input type="text" id="txtGruv" name="goovas" placeholder="hhaha" class="form-control form-control-sm">
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="txtPhotoUpload">Select Photo to Upload</label>
+                        <input type="file" name="file" id="txtPhotoUpload"
+                               class="form-control form-control-sm" accept="image/*"
+                               multiple=multiple>
+                    </div>
+                    <input id="btnUpload" name="btnUpload" type="submit" value="Upload" class="btn btn-sm btn-success">
+                </form>
+            </div> <!-- photo_upload_section -->
+        </div>
+    </div>
+
+{% endblock %}
